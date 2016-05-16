@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>{{title}}</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="../../../css/menu.css">
+  <link rel="stylesheet" type="text/css" href="../../../css/sunburst.css">
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+
+<body>
+  <div class='mainmenu'>
+  <ul>
+    <li class='active'><a href='/'><span>Home</span></a></li>
+    <li><a href='/questions'><span>Questions</span></a>
+      <ul class="">
+        <li><a href="/questions/1">Question1</a></li>
+        <li><a href='/questions/2'>Question2</a></li>
+        <li><a href="/questions/3">Question3</a></li>
+        <li><a href="/questions/4">Question4</a></li>
+      </ul>
+    </li>
+
+    <li><a href='/reports'><span>Reports</span></a>
+      <ul class="">
+        <li><a href="/reports/1">Open Job Postings</a></li>
+        <li><a href="/reports/2">Scores per posting</a></li>
+        <li><a href="/reports/3">List of categories</a></li>
+      </ul>
+    </li>
+
+    {% if loggedin == 'true' %}
+      <li class='last' style="float:right"><a href='/logout'><span>Logout</span></a></li>
+    {% else %}
+      <li class='last' style="float:right"><a href='/login'><span>Login</span></a></li>
+    {% endif %}
+
+  </ul>
+  </div>
+
+  {% block content %}{% endblock %}
+</body>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+</html>

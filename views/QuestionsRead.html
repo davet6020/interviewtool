@@ -1,0 +1,97 @@
+  {% extends 'cdnloads.html' %}
+
+  {% block content %}
+
+    <!-- If there is a comment in the table for this record
+          we want to display it. -->
+    {% if rows[0].comment.length > 0  %}
+      <h2>{{rows[0].comment}}</h2>
+      <!-- Else: <h4>Answer the following question</h4> -->
+    {% endif %}
+
+    {% for row in rows %}
+      <!-- 1=multiple choice basic -->
+      {% if rows[0].questionType == 1 %}
+        <h3>{{row.question}}</h3>
+      {% endif %}
+      <!-- 2=multiple choice with code sample -->
+      {% if rows[0].questionType == 2 %}
+        <pre class="prettyprint">{{row.question}}</pre>
+      {% endif %}
+    {% endfor %}
+
+    <form class="form-horizontal" method="POST" action="/questions/answer">
+      <!-- Multiple choice basic question -->
+      {% if rows[0].questionType == 1 %}
+        <h3>Choose one answer</h3>
+      {% endif %}
+    
+      <!-- Multiple choice with code sample question -->
+      {% if rows[0].questionType == 2 %}
+        <h3>Choose one answer</h3>
+      {% endif %}
+
+      <!-- True / False question -->
+      {% if rows[0].questionType == 3 %}
+        <h2>True or False</h2>
+      {% endif %}
+
+      <!-- Free-form text question -->
+      {% if rows[0].questionType == 4 %}
+        <h2>Type your answer in the box below</h2>
+      {% endif %}
+    
+      <div class="form-group">
+            <div class="col-md-12">
+              {% for row in rows %}
+                <div class="btn-group-vertical col-md-10">
+                  <!-- Only display possible answers if they are not empty in the table -->
+                  {% if row.answer1.length > 0  %}
+                    <input type="radio" class="radio20" name="answer" value="1" />
+                      <pre class="prettyprint">{{row.answer1}}</pre>
+                  {% endif %}
+                  {% if row.answer2.length > 0  %}
+                    <input type="radio" class="radio20" name="answer" value="2" />
+                      <pre class="prettyprint">{{row.answer2}}</pre>
+                  {% endif %}
+                  {% if row.answer3.length > 0  %}
+                    <input type="radio" class="radio20" name="answer" value="3" />
+                      <pre class="prettyprint">{{row.answer3}}</pre>
+                  {% endif %}
+                  {% if row.answer4.length > 0  %}
+                    <input type="radio" class="radio5" name="answer" value="4" />
+                      <pre class="prettyprint">{{row.answer4}}</pre>
+                  {% endif %}
+                  {% if row.answer5.length > 0  %}
+                    <input type="radio" class="radio20" name="answer" value="5" />
+                      <pre class="prettyprint">{{row.answer5}}</pre>
+                  {% endif %}
+                  <!-- This is for free-form text -->
+                  {% if row.questionType == 3  %}
+                    <pre class="prettyprint">
+                      <textarea rows="8" cols="126">
+                        Type your answer here
+                      </textarea></pre>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+      <div class="form-group">
+          <div class="col-xs-offset-1 col-xs-1">
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
+    </form>
+
+      <div class="col-md-12">
+        {% for row in rows %}
+          {% if row.secondsAllowed / 60 > 1  %}
+            <h4 class="prettyprint">This question must be completed in: {{row.secondsAllowed / 60}} minutes</h4>
+          {% else %}
+            <h4 class="prettyprint">This question must be completed in: {{row.secondsAllowed}} seconds</h4>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+{% endblock %}

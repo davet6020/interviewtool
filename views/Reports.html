@@ -1,0 +1,54 @@
+{% extends 'cdnloads.html' %}
+
+{% block content %}
+
+  <h1>{{title}}</h1>
+    <table class="sometable" style="width:100%">
+      <tr>
+        {% for column in columns %}
+          <th>{{column.name}}</th>
+        {% endfor %}
+      </tr>
+
+      <div>{{reportName}}</div>
+
+      {% if report == "departments" %}
+        {% for row in rows %}
+          <tr>
+            <td>{{row.Department}}</td>
+            <td>{{row.LastName}}</td>
+            <td>{{row.FirstName}}</td>
+            <td>{{row.Email}}</td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+
+      {% if report == "types" %}
+        {% for row in rows %}
+          <tr>
+            <td>{{row.Name}}</td>
+           </tr>
+        {% endfor %}
+      {% endif %}
+
+      {% if report == "users" %}
+        {% for row in rows %}
+          <tr>
+            <td>{{row.LastName}}</td>
+            <td>{{row.FirstName}}</td>
+            <td>{{row.Email}}</td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+
+      {% if report == "vendors" %}
+        {% for row in rows %}
+          <tr>
+            <td>{{row.Name}}</td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+
+    </table>
+
+{% endblock %}
